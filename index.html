@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Envelope</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #FF69B4; /* Hot Pink */
+            margin: 0;
+            position: relative;
+        }
+        .envelope {
+            width: 400px;
+            height: 240px;
+            background-color: #FFB6C1; /* Light Pink */
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .heart {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #FF1493; /* Deep Pink */
+            transform: rotate(-45deg);
+            left: 50%;
+            top: 50%;
+            margin-left: -25px;
+            margin-top: -25px;
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #FF1493; /* Deep Pink */
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -25px;
+            left: 0;
+        }
+        .heart::after {
+            left: 25px;
+            top: 0;
+        }
+        .letter {
+            display: none;
+            background-color: white;
+            padding: 40px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            position: absolute;
+            top: 280px;
+            width: 400px;
+            text-align: center; /* Center text in letter */
+        }
+        .button {
+            margin: 20px 0;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .yes-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .no-button {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="envelope" onclick="showLetter()">
+        <div class="heart"></div>
+    </div>
+    
+    <div class="letter" id="letter">
+        <p>Will you be my Valentine? 🥹</p>
+        <button class="button yes-button" onclick="showResponse()">Yes</button>
+        <button class="button no-button" onclick="handleNo()">No</button>
+    </div>
+
+    <script>
+        function showLetter() {
+            document.getElementById('letter').style.display = 'block';
+        }
+
+        function showResponse() {
+            alert("Thank you for being my valentines today 🫶🏽🌹❤️");
+        }
+
+        function handleNo() {
+            createRandomYesButton();
+        }
+
+        function createRandomYesButton() {
+            const yesButton = document.createElement('button');
+            yesButton.className = 'button yes-button';
+            yesButton.textContent = 'Yes';
+            yesButton.onclick = showResponse;
+            placeButtonRandomly(yesButton);
+            document.body.appendChild(yesButton);
+        }
+
+        function placeButtonRandomly(button) {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            button.style.position = 'absolute';
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+    </script>
+</body>
+</html>
